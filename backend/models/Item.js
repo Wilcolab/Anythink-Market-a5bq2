@@ -3,12 +3,15 @@ var uniqueValidator = require("mongoose-unique-validator");
 var slug = require("slug");
 var User = mongoose.model("User");
 
+const placeholder = '../placeholder.png'
+
 var ItemSchema = new mongoose.Schema(
   {
     slug: { type: String, lowercase: true, unique: true },
     title: String,
     description: String,
     image: String,
+    placeholderImage: String,
     favoritesCount: { type: Number, default: 0 },
     comments: [{ type: mongoose.Schema.Types.ObjectId, ref: "Comment" }],
     tagList: [{ type: String }],
@@ -50,6 +53,7 @@ ItemSchema.methods.toJSONFor = function(user) {
     title: this.title,
     description: this.description,
     image: this.image,
+    placeholderImage: placeholder,
     createdAt: this.createdAt,
     updatedAt: this.updatedAt,
     tagList: this.tagList,
